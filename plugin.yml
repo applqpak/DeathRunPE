@@ -1,0 +1,8 @@
+name: DeathRunPE
+author: Sandertv
+version: 0.1
+main: Sandertv\DeathRunPE\main
+api: [2.0]
+
+permissions:
+  ...
