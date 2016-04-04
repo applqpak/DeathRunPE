@@ -44,20 +44,21 @@ class DeathRunPE extends PluginBase implements Listener{
     }
         
     public function onCommand(CommandSender $sender, Command $cmd, $label, array $args){
-        if($cmd->getName() == "dr" && $sender instanceof Player){
-            
-        switch(strtolower($cmd->getName())){
-            case "help":
-                if($sender->hasPermission("deathrun") || $sender->hasPermission("deathrun.command") || $sender->hasPermission("deathrun.command.help")){
-                    $this->sendMessage(TextFormat::AQUA . "DeathRunPE Help");
-                    $this->sendMessage(TextFormat::GREEN . "/dr join - Joins a DeathRun game.");
-                    $this->sendMessage(TextFormat::GREEN . "/dr stop - Stops the DeathRun game.");
-                    $this->sendMessage(TextFormat::GREEN . "/dr create - Creates a DeathRun world");
-                break;
-                }
-            case "create":
-                if($sender->hasPermission("deathrun") || $sender-> hasPermission("deathrun.command") || $sender->hasPermission("deathrun.command.create")){
-                    $this->sendMessage(TextFormat::AQUA . "DeathRun world created!");
+        switch($cmd->getName()){
+            case "dr":
+                switch($cmd->getName())){
+                    case "help":
+                        if($sender->hasPermission("deathrun") || $sender->hasPermission("deathrun.command") || $sender->hasPermission("deathrun.command.help")){
+                            $sender->sendMessage(TextFormat::AQUA . "DeathRunPE Help");
+                            $sender->sendMessage(TextFormat::GREEN . "/dr join - Joins a DeathRun game.");
+                            $sender->sendMessage(TextFormat::GREEN . "/dr stop - Stops the DeathRun game.");
+                            $sender->sendMessage(TextFormat::GREEN . "/dr create - Creates a DeathRun world");
+                        }
+                        break;
+                
+                    case "create":
+                        if($sender->hasPermission("deathrun") || $sender-> hasPermission("deathrun.command") || $sender->hasPermission("deathrun.command.create")){
+                            $sender->sendMessage(TextFormat::AQUA . "DeathRun world created!");
                     
                 
                 }      
