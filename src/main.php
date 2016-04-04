@@ -30,10 +30,15 @@ class DeathRunPE extends PluginBase implements Listener{
     public function onLoad(){
         $this->getLogger()->info("DeathRunPE Loading!");
     }
+    $level = "DeathRun";
+    $level = $args[1];
+    
     public function onEnable(){
         $this->getServer()->getPluginManager->registerEvents($this,$this);
         $this->getLogger()->info("DeathRunPE Enabled!");
-        
+        if(file_exists($this->getServer()->getDataPath() . "/worlds/" . $args[1])) {
+            $this->getServer()->loadLevel($level);
+        }
         //Config files
         $this->saveResources("config.yml");
         $yml = new Config($this->getDataFolder() . "config.yml", Config::YAML);
@@ -41,8 +46,8 @@ class DeathRunPE extends PluginBase implements Listener{
         
         $this->getLogger()->debug("Config files are saved!");
         
-    }
-        
+        }
+    
     public function onCommand(CommandSender $sender, Command $cmd, $label, array $args){
         switch($cmd->getName()){
             case "dr":
@@ -58,7 +63,10 @@ class DeathRunPE extends PluginBase implements Listener{
                 
                     case "create":
                         if($sender->hasPermission("deathrun") || $sender-> hasPermission("deathrun.command") || $sender->hasPermission("deathrun.command.create")){
-                            $sender->sendMessage(TextFormat::AQUA . "DeathRun world created!");
+                            if(file_exists($this->getServer()->getDataPath() . "/worlds/" . $args[1])){
+                                $sender->sendMessage(TextFormat::AQUA . "DeathRun world created!");
+                                $this->getServer()->generateLevel($level);
+                                $this->getServer()->loadLevel($level);
                     
                 
                 }      
